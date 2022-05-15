@@ -1,0 +1,40 @@
+nav {
+    height: 10%;
+    width: 100%;
+    background-color: coral;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    ul {
+        justify-content: flex-end;
+        li {
+            list-style: none;
+            a {
+                color: white;
+                margin-right: 30px;
+                &:hover {
+                    cursor: pointer;
+                    color: black;
+                }
+            }
+        }
+    }
+}
+
+.logo {
+    width: 15%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    color: white;
+    height: 20%;
+    .titulo {
+        font-size: 30px;
+    }
+}
+
+.itemList{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
