@@ -1,5 +1,5 @@
 const ItemListContainer = (props) => {
-    return <h2>{props.greeting}</h2>
+    return <h2 className="saludo">{props.greeting}</h2>
 }
 
 export default ItemListContainer

@@ -1,0 +1,31 @@
+
+.Botonera{
+    width:20%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    height:10%;
+    p{
+        color: coral;
+        font-size: 30px;
+        font-weight: bold;
+        width:50%;
+    }
+    .botones{
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        width:25%;
+        button{
+            border-color:  coral;
+            background-color: white;
+            color: coral;
+            width:100%;
+            font-size:25px;
+            font-weight: bold;
+            cursor:pointer;
+    }
+}
+}
+

@@ -1,0 +1,17 @@
+.CardContainer{
+    margin-top:10px;
+    height: 400px;
+    width: 100%;
+    border-color: black;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    .Card{
+        border:1px solid black;
+        width:20%;
+        height:400px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}

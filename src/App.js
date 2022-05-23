@@ -2,17 +2,21 @@ import './scss/App.scss';
 import React from 'react';
 import NavBar from './components/navbar/NavBar';
 import ItemListContainer from './components/ItemListContainer/ItemListContainer';
-import CartWidget from '../src/components/navbar/CartWidget';
+import ItemCount from './components/ItemCount/ItemCount';
 
 function App() {
   return (
     <div className="App">
-      <header> 
+      <header className="navbar"> 
       <NavBar />
       </header>
+      <div className="CardContainer">
+      <div className="Card">
+      <ItemListContainer greeting="Esta va a ser una Card"/>
+      </div>
+      </div>
       <div className="itemList">
-      <CartWidget/>
-      <ItemListContainer  greeting="Esta es una Tienda"/>
+      <ItemCount/>
       </div>
     </div>
   );
