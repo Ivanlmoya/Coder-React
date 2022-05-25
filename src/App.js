@@ -3,6 +3,7 @@ import React from 'react';
 import NavBar from './components/navbar/NavBar';
 import ItemListContainer from './components/ItemListContainer/ItemListContainer';
 import ItemCount from './components/ItemCount/ItemCount';
+import BotonCarrito from './components/ItemCount/BotonCarrito/BotonCarrito';
 
 function App() {
   return (
@@ -10,13 +11,8 @@ function App() {
       <header className="navbar"> 
       <NavBar />
       </header>
-      <div className="CardContainer">
-      <div className="Card">
-      <ItemListContainer greeting="Esta va a ser una Card"/>
-      </div>
-      </div>
-      <div className="itemList">
-      <ItemCount/>
+      <div className="container">
+      <ItemListContainer/>
       </div>
     </div>
   );

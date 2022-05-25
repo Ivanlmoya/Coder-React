@@ -1,6 +1,5 @@
-
 .Botonera{
-    width:20%;
+    width:100%;
     display:flex;
     align-items:center;
     justify-content:center;
@@ -26,6 +25,11 @@
             font-weight: bold;
             cursor:pointer;
     }
+    
+}
+.botones2{
+    @extend .botones;
+    width:100%;
 }
 }
 
