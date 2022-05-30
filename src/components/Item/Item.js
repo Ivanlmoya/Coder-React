@@ -1,7 +1,7 @@
-import ItemCount from "../ItemCount/ItemCount";
-import BotonCarrito from "../ItemCount/BotonCarrito/BotonCarrito";
+import ItemCount from '../ItemCount/ItemCount';
+import BotonCarrito from '../ItemCount/BotonCarrito/BotonCarrito';
 
-const Item = ({id, name , price,img}) =>{
+const Item = ({id, name , price,img , stock}) =>{
 
     return(
         <div className="CardContainer">
@@ -14,8 +14,8 @@ const Item = ({id, name , price,img}) =>{
         <p>${price}</p>
         </div>
         </div>
-        <ItemCount/>
-        <BotonCarrito/>
+        <ItemCount stock={stock}/>
+        <BotonCarrito />
         </div>
     )
 

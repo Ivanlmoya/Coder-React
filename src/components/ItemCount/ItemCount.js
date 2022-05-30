@@ -1,15 +1,20 @@
 import {useState} from 'react';
 
-const ItemCount = () => {
+const ItemCount = ({stock}) => {
 
     const [count, setCount] = useState(0)
 
     const decrement = () => {
+        if(count>=1){
         setCount(count - 1)
+        }
     }
 
     const increment = () => {
+        if(count<stock)
+        {
         setCount(count + 1)
+        }
     }
 
     return ( 

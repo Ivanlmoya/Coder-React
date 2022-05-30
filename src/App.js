@@ -2,8 +2,7 @@ import './scss/App.scss';
 import React from 'react';
 import NavBar from './components/navbar/NavBar';
 import ItemListContainer from './components/ItemListContainer/ItemListContainer';
-import ItemCount from './components/ItemCount/ItemCount';
-import BotonCarrito from './components/ItemCount/BotonCarrito/BotonCarrito';
+import ItemDetail from './components/ItemDetailContainer/ItemDetail';
 
 function App() {
   return (

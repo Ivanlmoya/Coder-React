@@ -1,3 +1,6 @@
+.SuperContainer{
+    display: flex;
+    flex-direction: Column;
 .container{
     width: 100%;
     display: flex;
@@ -48,5 +51,6 @@
             }
         }
     }
+}
 }
 }

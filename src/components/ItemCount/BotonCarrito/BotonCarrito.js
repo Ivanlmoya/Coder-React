@@ -1,9 +1,12 @@
+
+
 const BotonCarrito = () => {
 
     return ( 
         <div className= "Botonera">
         <div className = "botones2" > 
-        <button> Agregar al Carrito </button> 
+        <button> Agregar al Carrito </button>
+
         </div>
         </div>
     )
