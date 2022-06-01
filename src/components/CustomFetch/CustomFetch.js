@@ -11,7 +11,7 @@ const products = [
     id: '2',
     name:'zapatillas puma',
     price: 800,
-    category: 'zapatillas',
+    category: 'deportivas',
     img:'https://www.dexter.com.ar/on/demandware.static/-/Sites-dabra-catalog/default/dw70fe9a4a/products/PU_376694-01/PU_376694-01-1.JPG',
     stock:20,
     description:'Las Zapatillas Puma Softride Enzo Nxt son livianas como plumas y equipadas como roble'
@@ -31,5 +31,21 @@ export const getProducts = () =>{
         setTimeout(()=> {
             resolve(products)
         },2000)
+    })
+}
+
+export const getProductsById = (id) => {
+    return new Promise (resolve => {
+        setTimeout(() => {
+            resolve(products.find(prod => prod.id === id))
+        }, 500)
+    })
+}
+
+export const getProductsByCategory = (categoryId) => {
+    return new Promise(resolve => {
+        setTimeout(() => {
+            resolve(products.filter(prod => prod.category === categoryId))
+        },500)
     })
 }

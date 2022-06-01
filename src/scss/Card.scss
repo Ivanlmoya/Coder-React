@@ -9,7 +9,7 @@
 
 .CardContainer{
     margin-top:10px;
-    height: 500px;
+    height: 525px;
     width: 20%;
     border-color: black;
     display:flex;
@@ -48,6 +48,16 @@
                 font-size: 25px;
                 font-weight: bold;
                 width:100%;
+            }
+
+            .VerDetalle{
+                color: coral;
+                text-decoration: none;
+                font-weight: bold;
+                font-size:15px;
+                &:hover{
+                    color: rgb(161, 90, 3)
+                }
             }
         }
     }

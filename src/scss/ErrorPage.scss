@@ -1,0 +1,59 @@
+.Container404{
+    height:30vw;
+    display: flex;
+    flex-direction: column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    .Page404{
+        display: flex;
+        flex-direction: column;
+        justify-content:center;
+        align-items:center;
+        text-align:center;
+        h2{
+            margin:0px;
+            padding:0px;
+            color: coral;
+            font-size: 350px;
+            font-weight: bold;
+            text-shadow: 2px 2px 2px rgba(0,0,0,0.2);
+        }
+        p{
+            font-size: 48px;
+            font-weight: bold;
+            background-color: #fff;
+            position: absolute;
+            text-transform: uppercase;
+            color: #000;
+            line-height: 60px;
+        }
+
+
+    }
+    .Link404{
+
+        p{
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .buttonBack{
+            font-size: 20px;
+            text-transform: uppercase;
+            font-weight: bold;
+            display: inline-block;
+            padding: 15px 30px;
+            text-decoration: none;
+            border: solid 1px;
+            color: coral;
+            border-color: coral;
+            &:hover{
+                color: #fff;
+                box-shadow: 0px 10px 20px 0px rgba(0,0,0,0.3);
+                background-color: coral;
+            }
+        }
+    }
+
+}
