@@ -16,7 +16,7 @@ const NavBar = () => {
                 <li>
                 <Link to={'/'} >Home</Link>
                     <Link to={'/'} >Products</Link>
-                    <Link to={'//'} > Cart  <BsCart4/></Link>
+                    <Link to={'/cart'} > Cart  <BsCart4/></Link>
                     <Link to={'/about'} > About</Link>  
                 </li>
             </ul>

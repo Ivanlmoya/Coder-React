@@ -1,7 +1,18 @@
 import ItemCount from '../ItemCount/ItemCount';
-import BotonCarrito from '../ItemCount/BotonCarrito/BotonCarrito';
+import { Link } from 'react-router-dom';
+import {useState} from 'react';
 
 const ItemDetail = ({id , name , img, stock , category,description , price}) => {
+    
+    const [count, setCount] = useState(0)
+
+    const HandleOnAdd =(count) =>{
+        console.log(count);
+        setCount(count)
+    }
+    
+
+    
     return(
     <div className="ItemDetailContainer">
     <div className="FirstDetailContainer">
@@ -18,10 +29,7 @@ const ItemDetail = ({id , name , img, stock , category,description , price}) => 
         </div>
         <div className="BotonCarritoDetail">
         <div className="BotonStock">
-        <ItemCount stock={stock}/>
-        </div>
-        <div className="BotonAgregar">
-        <BotonCarrito/>
+        { count > 0  ? <Link to='/cart' className="FinalizarCompra">Finalizar compra</Link> : <ItemCount stock={stock} onAdd={HandleOnAdd}/>}
         </div>
         </div>
         </div>

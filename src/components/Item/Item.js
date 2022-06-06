@@ -1,8 +1,6 @@
-import ItemCount from '../ItemCount/ItemCount';
-import BotonCarrito from '../ItemCount/BotonCarrito/BotonCarrito';
 import { Link } from 'react-router-dom';
 
-const Item = ({id, name , price,img , stock}) =>{
+const Item = ({id, name , price,img }) =>{
 
     return(
         <div className="CardContainer">
@@ -16,8 +14,6 @@ const Item = ({id, name , price,img , stock}) =>{
         <Link to={`/detail/${id}`} className='VerDetalle'>Ver detalle</Link>
         </div>
         </div>
-        <ItemCount stock={stock}/>
-        <BotonCarrito />
         </div>
     )
 
