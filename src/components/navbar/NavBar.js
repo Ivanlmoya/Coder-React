@@ -2,8 +2,15 @@ import '../../scss/NavBar.scss';
 import {GiTechnoHeart} from "react-icons/gi";
 import { BsCart4 } from "react-icons/bs";
 import { Link } from 'react-router-dom';
+import { useContext } from 'react';
+import CartContext from '../../context/CartContext';
 
 const NavBar = () => {
+
+    const { getCount } = useContext(CartContext)
+
+    const count = getCount()
+
     return(
         <header className="navbar">
         <nav >
@@ -15,9 +22,9 @@ const NavBar = () => {
                 
                 <li>
                 <Link to={'/'} >Home</Link>
-                    <Link to={'/'} >Products</Link>
-                    <Link to={'/cart'} > Cart  <BsCart4/></Link>
-                    <Link to={'/about'} > About</Link>  
+                <Link to={'/'} >Products</Link>
+                <Link to={'/cart'} > {count > 0 ? count :'Cart ' }<BsCart4/></Link>
+                <Link to={'/about'} > About</Link>  
                 </li>
             </ul>
         </nav>

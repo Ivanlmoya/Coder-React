@@ -1,0 +1,39 @@
+.CartTitle{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: underline;
+    font-weight: bold;
+    font-size:50px;
+}
+
+.CartContainer{
+    display:flex;
+    justify-content:space-around;
+    align-items:center;
+    text-align:center;
+    border: 1px solid black;
+    height: 20vh;
+    margin: 10px;
+
+    .CartName{
+        font-size: 25px;
+        font-weight: bold;
+    }
+
+
+    .CartEliminar{
+        border-color:  coral;
+        background-color: white;
+        color: coral;
+        font-size:20px;
+        font-weight: bold;
+        cursor:pointer;
+    }
+
+    .CartImg{
+        height:200px;
+        width: 200px;
+    }
+
+}
