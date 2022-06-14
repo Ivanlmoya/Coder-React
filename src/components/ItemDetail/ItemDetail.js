@@ -11,7 +11,6 @@ const ItemDetail = ({id , name , img, stock , category,description , price}) => 
 
 
     const HandleOnAdd =(count) =>{
-        console.log(count);
         setCount(count)
         addItem({ id, name, price, count , img})
     }

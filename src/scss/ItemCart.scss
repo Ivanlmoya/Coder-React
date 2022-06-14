@@ -5,7 +5,45 @@
     text-decoration: underline;
     font-weight: bold;
     font-size:50px;
+    
 }
+.EmptyCartContainer{
+    display:flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    height:40vw;
+
+    .EmptyCarrito{
+        @extend .CartTitle
+    }
+    
+    .EmptyParrafo{
+        font-size:30px;
+    }
+    .ButtonProduct{
+        font-size: 20px;
+        text-transform: uppercase;
+        font-weight: bold;
+        display: inline-block;
+        padding: 15px 30px;
+        text-decoration: none;
+        border: solid 1px;
+        color: coral;
+        border-color: coral;
+        cursor: pointer;
+        &:hover{
+            color: #fff;
+            box-shadow: 0px 10px 20px 0px rgba(0,0,0,0.3);
+            background-color: coral;
+        }
+    }
+
+}
+
+
+
+
 
 .CartContainer{
     display:flex;
