@@ -2,8 +2,8 @@ import '../../scss/App.scss'
 import {useState,useEffect} from 'react';
 import ItemDetail from '../ItemDetail/ItemDetail';
 import { useParams } from 'react-router-dom';
-import {getProductsById} from '../CustomFetch/CustomFetch'
-
+import {getDoc, doc} from 'firebase/firestore'
+import {db} from '../../Services/Firebase/index'
 
 const ItemDetailContainer = () => {
     const [product,setProduct] =useState([])  
@@ -12,10 +12,13 @@ const ItemDetailContainer = () => {
 
 
     useEffect(() => {
-        getProductsById(productId).then(response => {
-            setProduct(response)
-        })
-    }, [])
+    getDoc(doc(db, 'products' , productId)).then(response => {
+        const product = {id : response.id, ...response.data()}
+        setProduct(product)
+    }).catch(error => {
+        console.log(error)
+    })
+    }, [productId])
 
     return (
         <div className="container">
