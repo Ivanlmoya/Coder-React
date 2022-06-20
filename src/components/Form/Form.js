@@ -1,9 +1,18 @@
 import {useForm} from 'react-hook-form';
-import { useState } from 'react';
+import { useState , useContext } from 'react';
+import { useNotification } from '../../notification/Notification'
+import CartContext from "../../context/CartContext"
+import {addDoc,collection, updateDoc, doc , getDocs , query ,where ,documentId, writeBatch} from 'firebase/firestore'
+import {db, collectionsName} from '../../Services/Firebase'
 
 const Form = () =>{
 
     const {register,formState:{errors}, watch, handleSubmit} = useForm();
+
+    const [loading, setLoading] = useState(false)
+
+    const { cart ,getTotal, clearAllItem  } = useContext(CartContext)
+    const { setNotification } = useNotification()
 
     const [order, setOrder] = useState({
         name: '',
@@ -12,18 +21,74 @@ const Form = () =>{
         address: ' ',
         comment: ''
     })
+
+
     
     const onSubmit = (data) =>{
-        setOrder({...data,
+        setOrder({
             name: data.nombre,
             email: data.email ,
             phone: data.telefono,
             address: data.direccion,
             comment: ''
         })
-    
+        setNotification('success',`se creo el siguiente usuario ${data.email}`)
     }
-    console.log(order.name)
+
+    const createOrder = () => {
+        
+        const objOrder = {
+            buyer: order,
+            items: cart ,
+            total: getTotal()        
+        }
+
+        const ids = cart.map(prod => prod.id)
+
+        const batch = writeBatch(db)
+
+        const outOfStock = []
+
+        const collectionIdRef = collection(db,'products')
+        getDocs(query(collectionIdRef , where(documentId(),'in',ids)))
+        .then(response =>{
+            response.docs.forEach(doc =>{
+                const dataDoc = doc.data()
+                const prodCount = cart.find(prod => prod.id === doc.id)?.count
+                if(dataDoc.stock >= prodCount){
+                    batch.update(doc.ref,{stock: dataDoc.stock - prodCount})
+                } else{
+                    outOfStock.push({id: doc.id , ...dataDoc})
+                }
+            })
+        }).then (()=>{
+            if(outOfStock.length === 0){
+                const collectRef = collection(db, collectionsName.orders)
+                return addDoc(collectRef , objOrder)
+            } else{
+                return Promise.reject({type: 'out_of_stock', products:outOfStock})
+            }
+        }).then(({id})=>{
+            batch.commit()
+            setNotification('success',`El id de la orden es: ${id}`)
+            console.log(objOrder)
+            
+            clearAllItem()
+        }).catch(error =>{
+            setNotification('error',`Algunos productos no tienen stock`)
+            console.log(objOrder)
+            if(error.type === 'out_of_stock'){
+
+            }
+        }).finally(() => {
+            setLoading(false)
+        })
+    }
+
+    if(loading) {
+        return <h1>Cargando...</h1>
+    }
+
 
     const incluirTelefono = watch('incluirTelefono')
 
@@ -33,7 +98,7 @@ const Form = () =>{
 
     return (
         <div>
-            <h2>Formulario</h2>
+            <h2>Check Out</h2>
             <form onSubmit={handleSubmit(onSubmit)}> 
                 <div>
                 <label>Nombre</label>
@@ -86,6 +151,7 @@ const Form = () =>{
                 )}
                 <input type='submit' value='Enviar'/>
             </form>
+            <button onClick={() =>createOrder()}className="CartEliminar" >Crear Orden</button>
         </div>
     )
 
