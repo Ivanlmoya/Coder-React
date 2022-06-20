@@ -10,6 +10,8 @@ const ItemListContainer = () => {
     const [products,setProducts] =useState([])  
     const { categoryId } = useParams()
 
+    const [loading, setLoading] = useState(true)
+
     useEffect(() => {
 
         const collectionRef = categoryId
@@ -23,8 +25,15 @@ const ItemListContainer = () => {
         setProducts(products)
     }).catch(error => {
         console.log(error)
+    }).finally(() => {
+        setLoading(false)
     })
     }, [categoryId])
+
+
+    if(loading) {
+        return <h1>Cargando...</h1>
+    }
 
     return (
         <ItemList products={products}/>  

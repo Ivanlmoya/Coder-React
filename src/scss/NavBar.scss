@@ -23,6 +23,25 @@ nav {
     }
 }
 
+.categorias{
+    height: 10%;
+    width: 30%;
+    background-color: coral;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .categoriasBoton {
+        color: white;
+        margin-right: 30px;
+        text-decoration: none;
+        &:hover {
+            cursor: pointer;
+            color: black;
+        }
+    }
+
+}
+
 .logo {
     width: 15%;
     display: flex;

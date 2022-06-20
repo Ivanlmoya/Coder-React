@@ -6,7 +6,9 @@ import {getDoc, doc} from 'firebase/firestore'
 import {db} from '../../Services/Firebase/index'
 
 const ItemDetailContainer = () => {
-    const [product,setProduct] =useState([])  
+    const [product,setProduct] =useState([]) 
+    
+    const [loading, setLoading] = useState(true)
 
     const { productId } = useParams()
 
@@ -17,8 +19,14 @@ const ItemDetailContainer = () => {
         setProduct(product)
     }).catch(error => {
         console.log(error)
+    }).finally(() => {
+        setLoading(false)
     })
     }, [productId])
+
+    if(loading) {
+        return <h1>Cargando...</h1>
+    }
 
     return (
         <div className="container">

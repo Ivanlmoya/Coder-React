@@ -7,11 +7,14 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import ErrorPage from './components/ErrorPage/ErrorPage';
 import { CartContextProvider } from './context/CartContext';
 import CartContainer from './components/CartContainer/CartContainer';
+import { NotificationProvider } from './notification/Notification';
+import Form from './components/Form/Form'
 
 function App() {
   return (
     <div className="App">
       <CartContextProvider>
+      <NotificationProvider>
       <BrowserRouter>
       <NavBar/>
       <Routes>
@@ -19,10 +22,12 @@ function App() {
       <Route path='/category/:categoryId' element={<ItemListContainer greeting="Productos filtrados por categoria"/>}/>
       <Route path='/detail/:productId' element={<ItemDetailContainer />}/>
       <Route path='/cart' element={<CartContainer />}/>
+      <Route path='/checkOut' element={<Form />}/>
       <Route path='/about' element={<h1>About</h1>}/>
       <Route path='*' element={<ErrorPage />} />
       </Routes>
       </BrowserRouter>
+      </NotificationProvider>
       </CartContextProvider>
     </div>
   );
