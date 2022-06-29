@@ -4,6 +4,8 @@ import { useNotification } from '../../notification/Notification'
 import CartContext from "../../context/CartContext"
 import {addDoc,collection, updateDoc, doc , getDocs , query ,where ,documentId, writeBatch} from 'firebase/firestore'
 import {db, collectionsName} from '../../Services/Firebase'
+import { useAuth } from '../../context/authContext';
+
 
 const Form = () =>{
 
@@ -22,20 +24,49 @@ const Form = () =>{
         comment: ''
     })
 
+    const [clicked, setClicked] = useState(false)
+
+    const {user} = useAuth();
+
+
 
     
     const onSubmit = (data) =>{
+
         setOrder({
             name: data.nombre,
             email: data.email ,
             phone: data.telefono,
             address: data.direccion,
             comment: ''
-        })
+        }) 
+
+        
         setNotification('success',`se creo el siguiente usuario ${data.email}`)
+        createOrder()
     }
 
+
+    const ActualizarData = async() =>{
+        try{
+            await setOrder({
+                 name: user.displayName,
+                 email: user.email ,
+                 phone: 123456789,
+                 address: 'prueba',
+                 comment: ''
+             })
+             
+         console.log(order)
+         }catch(error){
+             console.log(error)
+         }
+         setClicked(true)
+    }
+    
+   
     const createOrder = () => {
+
         
         const objOrder = {
             buyer: order,
@@ -72,7 +103,6 @@ const Form = () =>{
             batch.commit()
             setNotification('success',`El id de la orden es: ${id}`)
             console.log(objOrder)
-            
             clearAllItem()
         }).catch(error =>{
             setNotification('error',`Algunos productos no tienen stock`)
@@ -82,6 +112,7 @@ const Form = () =>{
             }
         }).finally(() => {
             setLoading(false)
+            setClicked(false)
         })
     }
 
@@ -99,6 +130,7 @@ const Form = () =>{
     return (
         <div>
             <h2>Check Out</h2>
+            { user.mail === null ?
             <form onSubmit={handleSubmit(onSubmit)}> 
                 <div>
                 <label>Nombre</label>
@@ -144,14 +176,23 @@ const Form = () =>{
                     <input type="checkbox" {...register('incluirTelefono')}/>
                 </div>
                 {incluirTelefono && (
-                      <div>
-                      <label>telefono</label>
-                      <input type="text" {...register('telefono')}/>
-                  </div>
+                <div>
+                <label>telefono</label>
+                <input type="text" {...register('telefono')}/>
+                </div>
                 )}
                 <input type='submit' value='Enviar'/>
             </form>
-            <button onClick={() =>createOrder()}className="CartEliminar" >Crear Orden</button>
+            :
+        
+            <div>
+                <h1 id="userDisplayName">{user.displayName}</h1>
+                <h1 id="userEmail">{user.email}</h1>
+               {clicked ? null :<button onClick={()=> ActualizarData()}>Actualizar Data</button>}
+               { clicked ?  <button onClick={() =>createOrder(user)} className="CartEliminar" >Crear Orden</button> : null}
+            </div>
+        
+        }
         </div>
     )
 

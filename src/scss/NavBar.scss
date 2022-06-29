@@ -21,6 +21,37 @@ nav {
             }
         }
     }
+
+    .usuarioNav{
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        align-items: center;
+        text-align: center;
+        width: 15vw;
+
+
+    button{
+            background-color:coral;
+            border-color: coral;
+            color: white;
+            text-decoration: none;
+            &:hover {
+                cursor: pointer;
+                color: black;
+            }
+        
+    }
+    .usuarioNavP{
+        display: flex;
+        color: white;
+        cursor:default;
+        justify-content: flex-start;
+        width:5vw;
+    }
+
+
+}
 }
 
 .categorias{

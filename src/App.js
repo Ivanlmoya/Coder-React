@@ -9,26 +9,41 @@ import { CartContextProvider } from './context/CartContext';
 import CartContainer from './components/CartContainer/CartContainer';
 import { NotificationProvider } from './notification/Notification';
 import Form from './components/Form/Form'
+import Home from './components/Home/Home';
+import Login from './components/Home/Login';
+import Register from './components/Home/Register';
+import AuthContextProvider from './context/authContext';
+import ProtectedRoute from './components/Home/ProtectedRoute'
+
 
 function App() {
+
   return (
     <div className="App">
+      <AuthContextProvider>
       <CartContextProvider>
       <NotificationProvider>
       <BrowserRouter>
       <NavBar/>
       <Routes>
-      <Route path='/' element={<ItemListContainer greeting="Todos los Productos"/>}/>
-      <Route path='/category/:categoryId' element={<ItemListContainer greeting="Productos filtrados por categoria"/>}/>
-      <Route path='/detail/:productId' element={<ItemDetailContainer />}/>
-      <Route path='/cart' element={<CartContainer />}/>
-      <Route path='/checkOut' element={<Form />}/>
-      <Route path='/about' element={<h1>About</h1>}/>
+      <Route path='/' element={
+        <ProtectedRoute>
+      <Login />
+      </ProtectedRoute>
+      }/>
+      <Route path='/login' element={<Login />}/>
+      <Route path='/Register' element={<Register />}/>
+      <Route path='/products' element={<ProtectedRoute><ItemListContainer /></ProtectedRoute>}/>
+      <Route path='/category/:categoryId' element={<ProtectedRoute><ItemListContainer /></ProtectedRoute>}/>
+      <Route path='/detail/:productId' element={<ProtectedRoute><ItemDetailContainer /></ProtectedRoute>}/>
+      <Route path='/cart' element={<ProtectedRoute><CartContainer /></ProtectedRoute>}/>
+      <Route path='/checkOut' element={<ProtectedRoute><Form /></ProtectedRoute>}/>
       <Route path='*' element={<ErrorPage />} />
       </Routes>
       </BrowserRouter>
       </NotificationProvider>
       </CartContextProvider>
+      </AuthContextProvider>
     </div>
   );
 }
