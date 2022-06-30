@@ -38,7 +38,7 @@ const ItemDetail = ({id , name , img, stock , category,description , price}) => 
         <div className="BotonCarritoDetail">
         {stock === 0 ? <h1>Sin Stock</h1>:
         <div className="BotonStock">
-        { count >= 1  ? <Link to='/cart' className="FinalizarCompra">Finalizar compra</Link> : <ItemCount stock={stock} onAdd={handleOnAdd} initial={getProduct(id)?.count}/>}
+        { count >= 1  ? <div> <Link to='/cart' className="FinalizarCompra">Finalizar compra</Link> <Link to='/products' className="FinalizarCompra">Seguir Comprando</Link></div>: <ItemCount stock={stock} onAdd={handleOnAdd} initial={getProduct(id)?.count}/>}
         </div>}
         </div>
         </div>

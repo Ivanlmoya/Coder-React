@@ -10,7 +10,7 @@ const ErrorPage = () => {
             </div>
             <div className="Link404">
             <p>No pudimos encontrar la pagina que estas buscando. Por favor intente otra pagina y verifique la URL ingesada.</p>
-			<Link to={'/'} > <p className="buttonBack">Go back to home page</p></Link>
+			<Link to={'/products'} > <p className="buttonBack">Go back to home page</p></Link>
             </div>
 		</div>     
     )

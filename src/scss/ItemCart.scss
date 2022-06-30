@@ -53,10 +53,12 @@
     border: 1px solid black;
     height: 20vh;
     margin: 10px;
+    width: 100%;
 
     .CartName{
         font-size: 25px;
         font-weight: bold;
+        width: 25%;
     }
 
 
@@ -70,8 +72,8 @@
     }
 
     .CartImg{
-        height:200px;
-        width: 200px;
+        height:180px;
+        width: 180px;
     }
 
 }

@@ -13,10 +13,13 @@ const NavBar = () => {
     const {user ,logout , loading} = useAuth();
     console.log(user)
 
+    const [LogOut, setLogOut] = useState(true)
+
     let location = useLocation()
 
     const handleLogOut = async () =>{
         await logout()
+        setLogOut(false)
     }
     const count = getCount()
     if(location.pathname === '/login'|| location.pathname === '/register'||  location.pathname === '/' ) return null
@@ -28,8 +31,9 @@ const NavBar = () => {
             <h1 className="titulo">Heart Tech</h1>
             </div>
             <div className="categorias">
-            <Link className="categoriasBoton" to={'/category/zapatillas'} >Zapatillas</Link>
-            <Link className="categoriasBoton" to={'/category/deportivas'} >Deportivas</Link>
+            <Link className="categoriasBoton" to={'/category/Nike'} >Nike</Link>
+            <Link className="categoriasBoton" to={'/category/Topper'} >Topper</Link>
+            <Link className="categoriasBoton" to={'/category/Reebok'} >Reebok</Link>
             </div>
             <div>
             <ul>
@@ -43,10 +47,10 @@ const NavBar = () => {
             <div className="botones">
             <div className="usuarioNav">
             <div className="usuarioNavP">
-            <p>Bienvendido! { user.displayName === null ? user.email : user.displayName}</p>
+            {LogOut ?  <p>Bienvendido! { user.displayName === null ? user.email : user.displayName}</p> : null}
             </div>
             <div>
-            {user.photoURL === null ?  null: <img width="50" height="50"src={user.photoURL}/>}
+            {LogOut ? <div>{user.photoURL === null ?  null: <img width="50" height="50"src={user.photoURL}/>}</div> : null}
             </div>
             <div>
             <button onClick={handleLogOut}>Log Out</button>

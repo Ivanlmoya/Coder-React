@@ -17,6 +17,7 @@ function AuthContextProvider ({children}){
 
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true)
+    const [ LogOut, setLogOut ] = useState(true)
 
 
     const signup = (email,password) => createUserWithEmailAndPassword(auth , email , password)

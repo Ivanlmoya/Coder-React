@@ -12,7 +12,7 @@ nav {
             list-style: none;
             a {
                 color: white;
-                margin-right: 30px;
+                margin-right: 20px;
                 text-decoration: none;
                 &:hover {
                     cursor: pointer;
@@ -39,7 +39,9 @@ nav {
             &:hover {
                 cursor: pointer;
                 color: black;
+                background-color:rgb(224, 73, 17);
             }
+            margin-right:2%;
         
     }
     .usuarioNavP{
@@ -47,7 +49,7 @@ nav {
         color: white;
         cursor:default;
         justify-content: flex-start;
-        width:5vw;
+        width:6vw;
     }
 
 
@@ -56,10 +58,10 @@ nav {
 
 .categorias{
     height: 10%;
-    width: 30%;
+    width: 50%;
     background-color: coral;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     .categoriasBoton {
         color: white;
@@ -77,7 +79,8 @@ nav {
     width: 15%;
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: flex-start;
+    margin-left:1%;
     color: white;
     height: 20%;
     .titulo {

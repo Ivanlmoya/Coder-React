@@ -17,6 +17,7 @@
     justify-content: center;
     border:1px solid black;
     flex-direction: column;
+    margin-bottom:5px;
     .Card{
         height: 500px;
         width:100%;
@@ -28,13 +29,13 @@
         .UpperCard{
             display: flex;
             flex-direction: column;
-            width: 100%;
+            width: 95%;
             text-align: center;
             justify-content: center;
             height:80px; 
             p{
                 color: coral;
-                font-size: 35px;
+                font-size: 30px;
                 font-weight: bold;
                 width:100%;
             }

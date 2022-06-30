@@ -14,6 +14,8 @@ function Login() {
         password: '',
     })
 
+    const [ LogOut, setLogOut ] = useState(true)
+
     const {login , loginWithGoogle, resetPassword}  = useAuth();
     const navigate =  useNavigate();
 
@@ -46,7 +48,9 @@ const handleChange = ({target: {name, value}}) => {
 
 
     const handleGoogleSignIn = async () =>{
+        setLogOut(true)
         try{
+         setLogOut(true)
          await  loginWithGoogle() 
          navigate('/products')
         }catch(error){

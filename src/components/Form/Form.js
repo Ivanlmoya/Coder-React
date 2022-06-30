@@ -47,13 +47,13 @@ const Form = () =>{
     }
 
 
-    const ActualizarData = async() =>{
+    const ActualizarData = async(data) =>{
         try{
             await setOrder({
                  name: user.displayName,
                  email: user.email ,
-                 phone: 123456789,
-                 address: 'prueba',
+                 phone:  data.telefono,
+                 address: data.direccion,
                  comment: ''
              })
              
@@ -128,9 +128,16 @@ const Form = () =>{
     }
 
     return (
-        <div>
-            <h2>Check Out</h2>
-            { user.mail === null ?
+        <div className="containerForm">
+            <h2 className="tituloForm">Check Out</h2>
+
+            <div>
+                <h1 id="userDisplayName">{user.displayName}</h1>
+                <h1 id="userEmail">{user.email}</h1>
+               {clicked ? null :<button onClick={()=> ActualizarData()}>Actualizar Data</button>}
+               { clicked ?  <button onClick={() =>createOrder(user)} className="CartEliminar" >Crear Orden</button> : null}
+            </div>
+   
             <form onSubmit={handleSubmit(onSubmit)}> 
                 <div>
                 <label>Nombre</label>
@@ -182,17 +189,8 @@ const Form = () =>{
                 </div>
                 )}
                 <input type='submit' value='Enviar'/>
-            </form>
-            :
+            </form>     
         
-            <div>
-                <h1 id="userDisplayName">{user.displayName}</h1>
-                <h1 id="userEmail">{user.email}</h1>
-               {clicked ? null :<button onClick={()=> ActualizarData()}>Actualizar Data</button>}
-               { clicked ?  <button onClick={() =>createOrder(user)} className="CartEliminar" >Crear Orden</button> : null}
-            </div>
-        
-        }
         </div>
     )
 
