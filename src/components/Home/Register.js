@@ -2,6 +2,7 @@ import {useState} from 'react';
 import { useAuth } from '../../context/authContext';
 import {useNavigate} from 'react-router-dom';
 import Alert from './Alert';
+import React from 'react';
 import {GiTechnoHeart} from "react-icons/gi";
 
 function Register() {

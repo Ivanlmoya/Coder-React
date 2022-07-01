@@ -1,4 +1,7 @@
 import { useState, createContext } from "react";
+import React from 'react';
+import Swal from 'sweetalert2'
+
 
 const CartContext = createContext()
 
@@ -24,6 +27,8 @@ export const CartContextProvider = ({ children }) => {
             setCart(newCart)
         }
     }
+
+    const Swal = require('sweetalert2')
     
     const getCount = () => {
         let accu = 0
@@ -45,12 +50,41 @@ export const CartContextProvider = ({ children }) => {
     const removeItem = (id) => {
         const newCart = cart.filter(prod => prod.id !== id)
         setCart(newCart)
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 2000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+          })
+          Toast.fire({
+            icon: 'error',
+            title: 'se elimino el producto del carrito'
+          })
     }
 
     const clearAllItem = () => {
         const newCart = []
         setCart(newCart)
-        console.log()
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 2000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+          })
+          Toast.fire({
+            icon: 'error',
+            title: 'se eliminaron todos los productos del carrito'
+          })
     }
 
     const getTotal = () => {

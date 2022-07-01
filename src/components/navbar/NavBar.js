@@ -5,6 +5,7 @@ import { Link , useLocation} from 'react-router-dom';
 import { useContext , useState } from 'react';
 import CartContext from '../../context/CartContext';
 import { useAuth } from "../../context/authContext"
+import React from 'react';
 
 const NavBar = () => {
 

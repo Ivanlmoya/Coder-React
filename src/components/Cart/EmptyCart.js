@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import React from 'react';
 
 const EmptyCart = () => {
 
@@ -7,7 +8,7 @@ const EmptyCart = () => {
         <div className="EmptyCartContainer">
         <h1 className="EmptyCarrito">Carrito Vacio</h1>
         <p className="EmptyParrafo">No tienes productos para comprar</p>
-        <Link to={'/'} > <p className="ButtonProduct">ver los productos</p></Link>
+        <Link to={'/products'} > <p className="ButtonProduct">ver los productos</p></Link>
         </div>
     )
 }

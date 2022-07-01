@@ -1,10 +1,7 @@
-import { useState, useContext } from "react"
+import {  useContext } from "react"
 import CartContext from "../../context/CartContext"
-import {addDoc,collection, updateDoc, doc , getDocs , query ,where ,documentId, writeBatch} from 'firebase/firestore'
-import {db, collectionsName} from '../../Services/Firebase'
-import { useNotification } from '../../notification/Notification'
 import { Link } from 'react-router-dom'
-
+import React from 'react';
 const Cart = () => {
 
     const { cart, removeItem ,getTotal, clearAllItem } = useContext(CartContext)

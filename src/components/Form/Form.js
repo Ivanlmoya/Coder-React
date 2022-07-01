@@ -1,10 +1,11 @@
 import {useForm} from 'react-hook-form';
 import { useState , useContext } from 'react';
-import { useNotification } from '../../notification/Notification'
+import React  from 'react';
 import CartContext from "../../context/CartContext"
 import {addDoc,collection, updateDoc, doc , getDocs , query ,where ,documentId, writeBatch} from 'firebase/firestore'
 import {db, collectionsName} from '../../Services/Firebase'
 import { useAuth } from '../../context/authContext';
+import Swal from 'sweetalert2'
 
 
 const Form = () =>{
@@ -14,7 +15,8 @@ const Form = () =>{
     const [loading, setLoading] = useState(false)
 
     const { cart ,getTotal, clearAllItem  } = useContext(CartContext)
-    const { setNotification } = useNotification()
+
+    const Swal = require('sweetalert2')
 
     const [order, setOrder] = useState({
         name: '',
@@ -24,11 +26,7 @@ const Form = () =>{
         comment: ''
     })
 
-    const [clicked, setClicked] = useState(false)
-
     const {user} = useAuth();
-
-
 
     
     const onSubmit = (data) =>{
@@ -39,32 +37,10 @@ const Form = () =>{
             phone: data.telefono,
             address: data.direccion,
             comment: ''
-        }) 
-
-        
-        setNotification('success',`se creo el siguiente usuario ${data.email}`)
+        })
         createOrder()
     }
-
-
-    const ActualizarData = async(data) =>{
-        try{
-            await setOrder({
-                 name: user.displayName,
-                 email: user.email ,
-                 phone:  data.telefono,
-                 address: data.direccion,
-                 comment: ''
-             })
-             
-         console.log(order)
-         }catch(error){
-             console.log(error)
-         }
-         setClicked(true)
-    }
     
-   
     const createOrder = () => {
 
         
@@ -101,18 +77,48 @@ const Form = () =>{
             }
         }).then(({id})=>{
             batch.commit()
-            setNotification('success',`El id de la orden es: ${id}`)
+
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+              })
+              
+              Toast.fire({
+                icon: 'success',
+                title: `El numero de la orden es ${id} , se enviara un mail a ${user.email} , con el detalle de la compra`
+              })
             console.log(objOrder)
             clearAllItem()
         }).catch(error =>{
-            setNotification('error',`Algunos productos no tienen stock`)
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+              })
+              
+              Toast.fire({
+                icon: 'error',
+                title: `Algunos items seleccionados no tienen Stock`
+              })
             console.log(objOrder)
             if(error.type === 'out_of_stock'){
 
             }
         }).finally(() => {
             setLoading(false)
-            setClicked(false)
         })
     }
 
@@ -129,15 +135,7 @@ const Form = () =>{
 
     return (
         <div className="containerForm">
-            <h2 className="tituloForm">Check Out</h2>
-
-            <div>
-                <h1 id="userDisplayName">{user.displayName}</h1>
-                <h1 id="userEmail">{user.email}</h1>
-               {clicked ? null :<button onClick={()=> ActualizarData()}>Actualizar Data</button>}
-               { clicked ?  <button onClick={() =>createOrder(user)} className="CartEliminar" >Crear Orden</button> : null}
-            </div>
-   
+            <h2 className="tituloForm">Check Out</h2> 
             <form onSubmit={handleSubmit(onSubmit)}> 
                 <div>
                 <label>Nombre</label>
@@ -188,7 +186,7 @@ const Form = () =>{
                 <input type="text" {...register('telefono')}/>
                 </div>
                 )}
-                <input type='submit' value='Enviar'/>
+                <input type='submit' value='Enviar Formulario'/>
             </form>     
         
         </div>

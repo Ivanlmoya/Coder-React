@@ -2,23 +2,43 @@ import ItemCount from '../ItemCount/ItemCount';
 import { Link } from 'react-router-dom';
 import {useState , useContext } from 'react';
 import CartContext from '../../context/CartContext';
-import { useNotification } from '../../notification/Notification'
+import React from 'react';
+import Swal from 'sweetalert2'
+
 
 const ItemDetail = ({id , name , img, stock , category,description , price}) => {
     
     const [count, setCount] = useState(0)
-    const { setNotification } = useNotification()
-
     const { addItem, getProduct } = useContext(CartContext)
-  
+
+
+    const Swal = require('sweetalert2')
+
 
 
     const handleOnAdd = (count) =>{
         setCount(count)
-        setNotification('success', 'Se agrego correctamente al carrito')
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+              toast.addEventListener('mouseenter', Swal.stopTimer)
+              toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+          })
+          
+          Toast.fire({
+            icon: 'success',
+            title: 'Se agrego correctamente al carrito'
+          })
+    
         addItem({ id, name, price, count: Number(count) , img})
     }
     
+  
 
     
     return(

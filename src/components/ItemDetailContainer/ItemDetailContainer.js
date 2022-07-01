@@ -4,6 +4,7 @@ import ItemDetail from '../ItemDetail/ItemDetail';
 import { useParams } from 'react-router-dom';
 import {getDoc, doc} from 'firebase/firestore'
 import {db} from '../../Services/Firebase/index'
+import React from 'react';
 
 const ItemDetailContainer = () => {
     const [product,setProduct] =useState([]) 

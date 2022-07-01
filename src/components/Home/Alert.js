@@ -1,3 +1,5 @@
+import React from 'react';
+
 function Alert({message}){
     return (
         <div>

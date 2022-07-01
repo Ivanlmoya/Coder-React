@@ -1,5 +1,5 @@
 import {useAuth } from '../../context/authContext';
-
+import React from 'react';
 
 function Home(){
 
