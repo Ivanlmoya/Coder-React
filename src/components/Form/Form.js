@@ -68,7 +68,7 @@ const Form = () =>{
             items: cart ,
             total: getTotal()        
         }
-        console.log(objOrder)
+        
         const ids = cart.map(prod => prod.id)
 
         const batch = writeBatch(db)
@@ -130,7 +130,7 @@ const Form = () =>{
                 icon: 'error',
                 title: `Algunos items seleccionados no tienen Stock`
               })
-            console.log(objOrder)
+           
             if(error.type === 'out_of_stock'){
 
             }
