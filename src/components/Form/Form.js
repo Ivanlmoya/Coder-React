@@ -5,7 +5,6 @@ import CartContext from "../../context/CartContext"
 import {addDoc,collection, updateDoc, doc , getDocs , query ,where ,documentId, writeBatch} from 'firebase/firestore'
 import {db, collectionsName} from '../../Services/Firebase'
 import { useAuth } from '../../context/authContext';
-import Swal from 'sweetalert2'
 
 
 const Form = () =>{

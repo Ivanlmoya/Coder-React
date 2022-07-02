@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import {useState , useContext } from 'react';
 import CartContext from '../../context/CartContext';
 import React from 'react';
-import Swal from 'sweetalert2'
 
 
 const ItemDetail = ({id , name , img, stock , category,description , price}) => {
