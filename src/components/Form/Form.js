@@ -10,9 +10,10 @@ import Swal from 'sweetalert2'
 
 const Form = () =>{
 
-    const {register,formState:{errors}, watch, handleSubmit} = useForm();
+    const {register,formState:{errors}, handleSubmit} = useForm();
 
     const [loading, setLoading] = useState(false)
+    const [ActualizarDatos, setActualizarDatos] = useState(true)
 
     const { cart ,getTotal, clearAllItem  } = useContext(CartContext)
 
@@ -28,6 +29,25 @@ const Form = () =>{
 
     const {user} = useAuth();
 
+
+    const sendCustomEmail = async(order , id , cart) =>{
+
+        const collectionRef = collection(db,'email')
+
+        const emailContent ={
+        to: user.email,
+        message: {
+        subject:  `Has realizado la compra con orden ${id} `,
+        text: `Estimado ${user.displayName} , gracias por tu compra !`,
+        html: '',
+    }
+
+    }
+
+        return await addDoc(collectionRef,emailContent)
+
+    }
+
     
     const onSubmit = (data) =>{
 
@@ -38,7 +58,7 @@ const Form = () =>{
             address: data.direccion,
             comment: ''
         })
-        createOrder()
+        setActualizarDatos(false)
     }
     
     const createOrder = () => {
@@ -49,7 +69,7 @@ const Form = () =>{
             items: cart ,
             total: getTotal()        
         }
-
+        console.log(objOrder)
         const ids = cart.map(prod => prod.id)
 
         const batch = writeBatch(db)
@@ -77,7 +97,6 @@ const Form = () =>{
             }
         }).then(({id})=>{
             batch.commit()
-
             const Toast = Swal.mixin({
                 toast: true,
                 position: 'top-end',
@@ -89,12 +108,11 @@ const Form = () =>{
                 toast.addEventListener('mouseleave', Swal.resumeTimer)
                 }
               })
-              
               Toast.fire({
                 icon: 'success',
-                title: `El numero de la orden es ${id} , se enviara un mail a ${user.email} , con el detalle de la compra`
+                title: `El numero de la orden es ${id} , se enviara un mail a ${order.email} , con el detalle de la compra`
               })
-            console.log(objOrder)
+              sendCustomEmail(order , id ,cart)
             clearAllItem()
         }).catch(error =>{
             const Toast = Swal.mixin({
@@ -119,6 +137,7 @@ const Form = () =>{
             }
         }).finally(() => {
             setLoading(false)
+            setActualizarDatos(true)
         })
     }
 
@@ -127,8 +146,6 @@ const Form = () =>{
     }
 
 
-    const incluirTelefono = watch('incluirTelefono')
-
     const edadValidator = (value) => {
         return value >= 18 && value <= 65;
     }
@@ -136,8 +153,8 @@ const Form = () =>{
     return (
         <div className="containerForm">
             <h2 className="tituloForm">Check Out</h2> 
-            <form onSubmit={handleSubmit(onSubmit)}> 
-                <div>
+            <form onSubmit={handleSubmit(onSubmit)} className="formContainer"> 
+                <div className="inputNameOrder">
                 <label>Nombre</label>
                 <input type='text' {...register('nombre',{
                     required: true,
@@ -146,21 +163,21 @@ const Form = () =>{
                 {errors.nombre?.type === 'required' && <p>El campo nombre es requerido</p>}
                 {errors.nombre?.type === 'maxLength' && <p>debe tener menos de 20 caracteres</p>}
                 </div>
-                <div>
+                <div className="inputEdadOrder">
                 <label>Edad</label>
                 <input type='text'  {...register('edad', {
                     validate: {edadValidator}
                 })} />
                 {errors.edad && <p>la edad debe estar entre 18 y 65</p>}
                 </div>
-                <div>
+                <div className="inputDireccionOrder">
                 <label>Direccion</label>
                 <input type='text' {...register('direccion', {
                     required: true,
                     maxLength: 50
                 })} />
                 </div>
-                <div>
+                <div className="inputEmailOrder">
                 <label>Email</label>
                 <input type='text' {...register('email', {
                     required: true,
@@ -168,7 +185,7 @@ const Form = () =>{
                 })} />
                 {errors.email?.type === 'pattern' && <p>El formato del email es incorrecto</p>}
                 </div>
-                <div>
+                <div className="inputPaisOrder">
                 <label>Pais</label>
                 <select {...register('pais')}>
                 <option value="ar">Argentina</option>
@@ -176,19 +193,14 @@ const Form = () =>{
                 <option value="ch">Chile</option>
                 </select>
                 </div>
-                <div>
-                    <label>incluir telefono</label>
-                    <input type="checkbox" {...register('incluirTelefono')}/>
-                </div>
-                {incluirTelefono && (
-                <div>
-                <label>telefono</label>
+                <div className="inputTelefonoOrder">
+                <label>Telefono</label>
                 <input type="text" {...register('telefono')}/>
-                </div>
-                )}
-                <input type='submit' value='Enviar Formulario'/>
+                </div>  
+              { ActualizarDatos?  <input type='submit' value='Actualizar Datos' className="inputButtonOrder"/> :
+                <input type='submit' value='Enviar Pedido' onClick={()=>createOrder()} className="inputButtonOrder"/> }
             </form>     
-        
+                
         </div>
     )
 

@@ -7,9 +7,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import ErrorPage from './components/ErrorPage/ErrorPage';
 import { CartContextProvider } from './context/CartContext';
 import CartContainer from './components/CartContainer/CartContainer';
-import { NotificationProvider } from './notification/Notification';
 import Form from './components/Form/Form'
-import Home from './components/Home/Home';
 import Login from './components/Home/Login';
 import Register from './components/Home/Register';
 import AuthContextProvider from './context/authContext';
@@ -23,7 +21,6 @@ function App() {
     <div className="App">
       <AuthContextProvider>
       <CartContextProvider>
-      <NotificationProvider>
       <BrowserRouter>
       <NavBar/>
       <Routes>
@@ -42,7 +39,6 @@ function App() {
       <Route path='*' element={<ErrorPage />} />
       </Routes>
       </BrowserRouter>
-      </NotificationProvider>
       </CartContextProvider>
       </AuthContextProvider>
     </div>

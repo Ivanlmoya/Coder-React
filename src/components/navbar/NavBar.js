@@ -12,7 +12,6 @@ const NavBar = () => {
     const { getCount } = useContext(CartContext)
 
     const {user ,logout , loading} = useAuth();
-    console.log(user)
 
     const [LogOut, setLogOut] = useState(true)
 

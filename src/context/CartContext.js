@@ -70,6 +70,11 @@ export const CartContextProvider = ({ children }) => {
     const clearAllItem = () => {
         const newCart = []
         setCart(newCart)
+    }
+
+    const clearAllItemCarrito = () => {
+        const newCart = []
+        setCart(newCart)
         const Toast = Swal.mixin({
             toast: true,
             position: 'top-end',
@@ -81,9 +86,10 @@ export const CartContextProvider = ({ children }) => {
             toast.addEventListener('mouseleave', Swal.resumeTimer)
             }
           })
+          
           Toast.fire({
             icon: 'error',
-            title: 'se eliminaron todos los productos del carrito'
+            title: `Se eliminaron todos los Productos`
           })
     }
 
@@ -95,11 +101,10 @@ export const CartContextProvider = ({ children }) => {
         return total
     }
 
-  
 
    
     return(
-        <CartContext.Provider value={{ cart, addItem, getCount, getProduct, removeItem, getTotal  ,clearAllItem}}>
+        <CartContext.Provider value={{ cart, addItem, getCount, getProduct, removeItem, getTotal  ,clearAllItem , clearAllItemCarrito}}>
             {children}
         </CartContext.Provider>
     )
